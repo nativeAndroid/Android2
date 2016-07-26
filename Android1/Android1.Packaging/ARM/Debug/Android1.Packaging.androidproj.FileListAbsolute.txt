@@ -1,0 +1,6 @@
+C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\ARM\Debug\Android1.apk.recipe
+C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\ARM\Debug\Android1.apk.recipe.merged
+C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\ARM\Debug\FileStringReplace.incremental
+C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\ARM\Debug\Android1.apk
+C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\ARM\Debug\Android1.lastsuccessfuldeploy
+C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\ARM\Debug\Package\assets\texture\uvtemplate.png

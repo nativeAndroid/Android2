@@ -1,0 +1,21 @@
+﻿  ANDROID_HOME=C:\Program Files (x86)\Android\android-sdk
+  ANT_HOME=C:\Program Files (x86)\Microsoft Visual Studio 14.0\Apps\apache-ant-1.9.3\
+  JAVA_HOME=C:\Program Files (x86)\Java\jdk1.7.0_55
+  NDK_ROOT=C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\
+  main.cpp
+  In file included from main.cpp:1:
+  In file included from ../../common/source\shape/Cube.h:3:
+../../common/source\enviroment/loaderUtility/Texture.h(170,57): warning : data argument not used by format string [-Wformat-extra-args]
+                  LOGW("Unable to allocate row_pointer while loading ", filename);
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^
+  C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.NativeActivity\pch.h(11,98) :  note: expanded from macro 'LOGW'
+  #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "AndroidProject1.NativeActivity", __VA_ARGS__))
+                                                                                                   ^
+  1 warning generated.
+C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin\ld : error : ARM\Debug\main.o: multiple definition of 'Texture::createTexture(AAssetManager*, char const*)'
+  C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin\ld: ARM\Debug\Cube.o: previous definition here
+C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin\ld : error : ARM\Debug\main.o: multiple definition of 'Texture::png_asset_read(png_struct_def*, unsigned char*, unsigned int)'
+  C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin\ld: ARM\Debug\Cube.o: previous definition here
+C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin\ld : error : ARM\Debug\main.o: multiple definition of 'Texture::LoadImage(AAssetManager*, char const*)'
+  C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin\ld: ARM\Debug\Cube.o: previous definition here
+clang.exe : error : linker command failed with exit code 1 (use -v to see invocation)

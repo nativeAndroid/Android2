@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="android_native_app_glue.h" />
+    <ClInclude Include="..\..\common\source\enviroment\camera\Camera.h">
+      <Filter>enviroment\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\source\enviroment\loaderUtility\Texture.h">
+      <Filter>enviroment\loaderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\config.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\png.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngconf.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngdebug.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pnginfo.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pnglibconf.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngprefix.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngpriv.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngstruct.h">
+      <Filter>3rdparty\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\source\shape\Cube.h">
+      <Filter>enviroment\shape</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="android_native_app_glue.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\common\source\enviroment\camera\Camera.cpp">
+      <Filter>enviroment\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\png.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngerror.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngget.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngmem.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngpread.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngread.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngrio.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngrtran.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngrutil.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngset.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngtest.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngtrans.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngwio.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngwrite.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngwtran.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\library\android\jni\libpng\jni\pngwutil.c">
+      <Filter>3rdparty\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\source\shape\Cube.cpp">
+      <Filter>enviroment\shape</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="enviroment">
+      <UniqueIdentifier>{9c6ca08a-a611-431f-9b66-cf754d7265b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\shape">
+      <UniqueIdentifier>{75a33370-50fd-45c0-94ed-54ca589b9416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\camera">
+      <UniqueIdentifier>{a616387d-8af7-4a14-8e7a-e261ee895e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\loaderUtility">
+      <UniqueIdentifier>{a4b79b04-a0a1-4be6-a277-9dfde419368c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{6737c869-5721-4c98-affe-41f7bf229436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\libpng">
+      <UniqueIdentifier>{f8dfdd7d-1f11-44ce-a4b8-073bd31e08b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
