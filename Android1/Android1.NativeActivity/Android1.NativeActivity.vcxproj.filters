@@ -39,6 +39,9 @@
     <ClInclude Include="..\..\common\source\shape\Cube.h">
       <Filter>enviroment\shape</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\source\enviroment\loaderUtility\ShaderLoader.h">
+      <Filter>enviroment\loaderUtility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="android_native_app_glue.c" />

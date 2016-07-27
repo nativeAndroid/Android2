@@ -1,200 +1,106 @@
 #include "Cube.h"
 
-
-inline GLuint Cube::createShader(GLenum type, const char * shaderSrc)
-{
-	GLuint shader;
-	GLint compiledStatus;
-	GLuint Texture;
-	shader = glCreateShader(type);
-	if (shader == 0)
-		return 0;
-	// Load the shader source
-	glShaderSource(shader, 1, &shaderSrc, NULL);
-	// Compile the shader
-	glCompileShader(shader);
-	// Check the compile status
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiledStatus);
-
-	if (!compiledStatus)
-	{
-		GLint infoLen = 0;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
-		if (infoLen > 1)
-		{
-			char* infoLog = (char*)malloc(sizeof(char) * infoLen);
-			glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
-			LOGW("Bred");
-			LOGW(infoLog);
-			free(infoLog);
-		}
-		glDeleteShader(shader);
-		return 0;
-	}
-	return shader;
-}
-
-inline char * Cube::decompose(const char * filename)
-{
-	AAsset* file = AAssetManager_open(mgr, filename, AASSET_MODE_BUFFER);
-
-	assert(file != NULL);
-
-	size_t size = AAsset_getLength(file);
-	char* buffer = (char*)malloc(sizeof(char)*size + 1);
-	int err = AAsset_read(file, buffer, size);
-	buffer[size] = '\0';
-
-	if (err < 0) {
-		LOGW("WARNING SHADER ");
-		return "";
-	}
-
-	AAsset_close(file);
-	return buffer;
-}
-
-GLuint Cube::loadShaders(const char * vertex_path, const char * fragment_path)
-{
-	assert(mgr != NULL);
-
-	GLchar* vertexShaderSrc = decompose(vertex_path);
-	GLchar* fragmentShaderSrc = decompose(fragment_path);
-
-	GLuint vertexShader = createShader(GL_VERTEX_SHADER, vertexShaderSrc);
-	GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentShaderSrc);
-
-	assert(vertexShader != NULL);
-	assert(fragmentShader != NULL);
-
-	GLuint shprog = glCreateProgram();
-
-	assert(shprog != 0);
-
-	glAttachShader(shprog, vertexShader);
-	glAttachShader(shprog, fragmentShader);
-	glLinkProgram(shprog);
-
-	GLint linked;
-
-	glGetProgramiv(shprog, GL_LINK_STATUS, &linked);
-	if (!linked)
-	{
-		GLint infoLen = 0;
-		glGetProgramiv(shprog, GL_INFO_LOG_LENGTH, &infoLen);
-		if (infoLen > 1)
-		{
-			char* infoLog = (char*)malloc(sizeof(char) * infoLen);
-			glGetProgramInfoLog(shprog, infoLen, NULL, infoLog);
-			LOGW(infoLog);
-			free(infoLog);
-		}
-		glDeleteProgram(shprog);
-		LOGW("SHADER CREATING PROGRAM");
-		return 0;
-	}
-	// Store the program object
-	glDeleteShader(fragmentShader);
-	glDeleteShader(vertexShader);
-	return shprog;
-}
-
 void Cube::setMGR(AAssetManager * mgr)
 {
 	this->mgr = mgr;
+	shaderLoader.setMGR(mgr);
 }
 
-void Cube::setWidthAndHeigh(int width, int height)
+void Cube::setCamera(int width, int height)
 {
-	this->width = width;
-	this->height = height;
+	myCam = new Camera();
+	myCam->setWithAndHeight(width, height);
+	myCam->setDefaultProjection();
+	myCam->computeFrustrum();
+	myCam->computeMVP();
 }
+
+Cube::Cube()
+{
+}
+static const GLfloat g_vertex_buffer_data[] = {
+	-1.0f,-1.0f,-1.0f,
+	-1.0f,-1.0f, 1.0f,
+	-1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f,-1.0f,
+	-1.0f,-1.0f,-1.0f,
+	-1.0f, 1.0f,-1.0f,
+	1.0f,-1.0f, 1.0f,
+	-1.0f,-1.0f,-1.0f,
+	1.0f,-1.0f,-1.0f,
+	1.0f, 1.0f,-1.0f,
+	1.0f,-1.0f,-1.0f,
+	-1.0f,-1.0f,-1.0f,
+	-1.0f,-1.0f,-1.0f,
+	-1.0f, 1.0f, 1.0f,
+	-1.0f, 1.0f,-1.0f,
+	1.0f,-1.0f, 1.0f,
+	-1.0f,-1.0f, 1.0f,
+	-1.0f,-1.0f,-1.0f,
+	-1.0f, 1.0f, 1.0f,
+	-1.0f,-1.0f, 1.0f,
+	1.0f,-1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f,-1.0f,-1.0f,
+	1.0f, 1.0f,-1.0f,
+	1.0f,-1.0f,-1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f,-1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f,-1.0f,
+	-1.0f, 1.0f,-1.0f,
+	1.0f, 1.0f, 1.0f,
+	-1.0f, 1.0f,-1.0f,
+	-1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	-1.0f, 1.0f, 1.0f,
+	1.0f,-1.0f, 1.0f
+};
+static const GLfloat g_uv_buffer_data[] = {
+	0.000059f, 1.0f - 0.000004f,
+	0.000103f, 1.0f - 0.336048f,
+	0.335973f, 1.0f - 0.335903f,
+	1.000023f, 1.0f - 0.000013f,
+	0.667979f, 1.0f - 0.335851f,
+	0.999958f, 1.0f - 0.336064f,
+	0.667979f, 1.0f - 0.335851f,
+	0.336024f, 1.0f - 0.671877f,
+	0.667969f, 1.0f - 0.671889f,
+	1.000023f, 1.0f - 0.000013f,
+	0.668104f, 1.0f - 0.000013f,
+	0.667979f, 1.0f - 0.335851f,
+	0.000059f, 1.0f - 0.000004f,
+	0.335973f, 1.0f - 0.335903f,
+	0.336098f, 1.0f - 0.000071f,
+	0.667979f, 1.0f - 0.335851f,
+	0.335973f, 1.0f - 0.335903f,
+	0.336024f, 1.0f - 0.671877f,
+	1.000004f, 1.0f - 0.671847f,
+	0.999958f, 1.0f - 0.336064f,
+	0.667979f, 1.0f - 0.335851f,
+	0.668104f, 1.0f - 0.000013f,
+	0.335973f, 1.0f - 0.335903f,
+	0.667979f, 1.0f - 0.335851f,
+	0.335973f, 1.0f - 0.335903f,
+	0.668104f, 1.0f - 0.000013f,
+	0.336098f, 1.0f - 0.000071f,
+	0.000103f, 1.0f - 0.336048f,
+	0.000004f, 1.0f - 0.671870f,
+	0.336024f, 1.0f - 0.671877f,
+	0.000103f, 1.0f - 0.336048f,
+	0.336024f, 1.0f - 0.671877f,
+	0.335973f, 1.0f - 0.335903f,
+	0.667969f, 1.0f - 0.671889f,
+	1.000004f, 1.0f - 0.671847f,
+	0.667979f, 1.0f - 0.335851f
+};
 
 void Cube::loadShape()
 {
-	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f
-	};
-
-	static const GLfloat g_uv_buffer_data[] = {
-		0.000059f, 1.0f - 0.000004f,
-		0.000103f, 1.0f - 0.336048f,
-		0.335973f, 1.0f - 0.335903f,
-		1.000023f, 1.0f - 0.000013f,
-		0.667979f, 1.0f - 0.335851f,
-		0.999958f, 1.0f - 0.336064f,
-		0.667979f, 1.0f - 0.335851f,
-		0.336024f, 1.0f - 0.671877f,
-		0.667969f, 1.0f - 0.671889f,
-		1.000023f, 1.0f - 0.000013f,
-		0.668104f, 1.0f - 0.000013f,
-		0.667979f, 1.0f - 0.335851f,
-		0.000059f, 1.0f - 0.000004f,
-		0.335973f, 1.0f - 0.335903f,
-		0.336098f, 1.0f - 0.000071f,
-		0.667979f, 1.0f - 0.335851f,
-		0.335973f, 1.0f - 0.335903f,
-		0.336024f, 1.0f - 0.671877f,
-		1.000004f, 1.0f - 0.671847f,
-		0.999958f, 1.0f - 0.336064f,
-		0.667979f, 1.0f - 0.335851f,
-		0.668104f, 1.0f - 0.000013f,
-		0.335973f, 1.0f - 0.335903f,
-		0.667979f, 1.0f - 0.335851f,
-		0.335973f, 1.0f - 0.335903f,
-		0.668104f, 1.0f - 0.000013f,
-		0.336098f, 1.0f - 0.000071f,
-		0.000103f, 1.0f - 0.336048f,
-		0.000004f, 1.0f - 0.671870f,
-		0.336024f, 1.0f - 0.671877f,
-		0.000103f, 1.0f - 0.336048f,
-		0.336024f, 1.0f - 0.671877f,
-		0.335973f, 1.0f - 0.335903f,
-		0.667969f, 1.0f - 0.671889f,
-		1.000004f, 1.0f - 0.671847f,
-		0.667979f, 1.0f - 0.335851f
-	};
-
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	
+		
 	glGenBuffers(1, &uvbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
@@ -203,16 +109,12 @@ void Cube::loadShape()
 void Cube::loadShaders()
 {
 	glDepthFunc(GL_LESS);
-	programID = loadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
+	programID = shaderLoader.loadShaders("shader/TransformVertexShader.vertexshader", "shader/TextureFragmentShader.fragmentshader");
 	MatrixID = glGetUniformLocation(programID, "MVP");
 	vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
 	vertexUVID = glGetAttribLocation(programID, "vertexUV");
 
-	myCam = new Camera();
-	myCam->setDefaultProjection();
-	myCam->setMVP();
-
-	Texture = textureTools.createTexture(mgr, "uvtemplate.png");
+	Texture_ = textureTools.createTexture(mgr, "texture/uvtemplate.png");
 	TextureID = glGetUniformLocation(programID, "myTextureSampler");
 }
 
@@ -234,7 +136,7 @@ void Cube::drawShape()
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, Texture);
+	glBindTexture(GL_TEXTURE_2D, Texture_);
 	// Set our "myTextureSampler" sampler to user Texture Unit 0
 	glUniform1i(TextureID, 0);
 

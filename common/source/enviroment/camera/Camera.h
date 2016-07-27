@@ -1,5 +1,8 @@
 #pragma once
-#include <glm/gtx/transform.hpp>
+#ifndef TRANSFORM_H
+	#include <glm/gtx/transform.hpp>
+#endif
+
 /*
 	please take a look here http://stackoverflow.com/questions/30690348/make-camera-lookdirection-look-front-face/30691275#30691275
 */
@@ -38,6 +41,7 @@ private:
 protected:
 	glm::mat4 projection;
 	glm::mat4 model;
+	glm::mat4 frustrum;
 	float width, height;
 public:
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), 
@@ -57,9 +61,13 @@ public:
 
 	glm::mat4 GetViewMatrix()
 	{
-		return glm::lookAt(this->position, this->position + this->lookDirection, this->upDirection);
+		return frustrum;
 	}
 
+	void computeFrustrum()
+	{
+		frustrum = glm::lookAt(this->position, this->position + this->lookDirection, this->upDirection);
+	}
 
 	static glm::mat4 getDefaultViewMatrix()
 	{
@@ -82,7 +90,7 @@ public:
 		this->height = height;
 	}
 
-	void setMVP()
+	void computeMVP()
 	{
 		MVP =   projection * getDefaultViewMatrix() * model;;
 	}

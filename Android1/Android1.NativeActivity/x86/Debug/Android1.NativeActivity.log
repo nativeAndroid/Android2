@@ -1,0 +1,93 @@
+﻿  ANDROID_HOME=C:\Program Files (x86)\Android\android-sdk
+  ANT_HOME=C:\Program Files (x86)\Microsoft Visual Studio 14.0\Apps\apache-ant-1.9.3\
+  JAVA_HOME=C:\Program Files (x86)\Java\jdk1.7.0_55
+  NDK_ROOT=C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\
+  pch.h
+  png.c
+  pngerror.c
+  pngget.c
+  pngmem.c
+  pngpread.c
+  pngread.c
+  pngrio.c
+  pngrtran.c
+  pngrutil.c
+  pngset.c
+  pngtest.c
+  pngtrans.c
+  pngwio.c
+  pngwrite.c
+  pngwtran.c
+  pngwutil.c
+  Camera.cpp
+  In file included from ..\..\common\source\enviroment\camera\Camera.cpp:5:
+../../common/source\enviroment/camera/Camera.h(36,10): warning : private field 'MovementSpeed' is not used [-Wunused-private-field]
+          GLfloat MovementSpeed;
+                  ^
+../../common/source\enviroment/camera/Camera.h(38,10): warning : private field 'Zoom' is not used [-Wunused-private-field]
+          GLfloat Zoom;
+                  ^
+  2 warnings generated.
+  Cube.cpp
+  In file included from ..\..\common\source\shape\Cube.cpp:1:
+  In file included from ..\..\common\source\shape/Cube.h:3:
+../../common/source\enviroment/loaderUtility/Texture.h(153,58): warning : data argument not used by format string [-Wformat-extra-args]
+                          LOGW("Unable to allocate row_pointer while loading ", filename);
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^
+  C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.NativeActivity\pch.h(11,98) :  note: expanded from macro 'LOGW'
+  #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "AndroidProject1.NativeActivity", __VA_ARGS__))
+                                                                                                   ^
+..\..\common\source\shape\Cube.cpp(28,9): warning : format string is not a string literal (potentially insecure) [-Wformat-security]
+                          LOGW(infoLog);
+                               ^~~~~~~
+  C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.NativeActivity\pch.h(11,98) :  note: expanded from macro 'LOGW'
+  #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "AndroidProject1.NativeActivity", __VA_ARGS__))
+                                                                                                   ^
+..\..\common\source\shape\Cube.cpp(8,9): warning : unused variable 'Texture' [-Wunused-variable]
+          GLuint Texture;
+                 ^
+..\..\common\source\shape\Cube.cpp(50,10): warning : ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+                  return "";
+                         ^
+..\..\common\source\shape\Cube.cpp(67,22): warning : comparison between NULL and non-pointer ('GLuint' (aka 'unsigned int') and NULL) [-Wnull-arithmetic]
+          assert(vertexShader != NULL);
+                 ~~~~~~~~~~~~ ^  ~~~~
+  C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\platforms\android-19\arch-x86\usr\include\assert.h(56,23) :  note: expanded from macro 'assert'
+  #  define       assert(e)       ((e) ? (void)0 : __assert2(__FILE__, __LINE__, __func__, #e))
+                                    ^
+..\..\common\source\shape\Cube.cpp(68,24): warning : comparison between NULL and non-pointer ('GLuint' (aka 'unsigned int') and NULL) [-Wnull-arithmetic]
+          assert(fragmentShader != NULL);
+                 ~~~~~~~~~~~~~~ ^  ~~~~
+  C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\platforms\android-19\arch-x86\usr\include\assert.h(56,23) :  note: expanded from macro 'assert'
+  #  define       assert(e)       ((e) ? (void)0 : __assert2(__FILE__, __LINE__, __func__, #e))
+                                    ^
+..\..\common\source\shape\Cube.cpp(89,9): warning : format string is not a string literal (potentially insecure) [-Wformat-security]
+                          LOGW(infoLog);
+                               ^~~~~~~
+  C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.NativeActivity\pch.h(11,98) :  note: expanded from macro 'LOGW'
+  #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "AndroidProject1.NativeActivity", __VA_ARGS__))
+                                                                                                   ^
+  In file included from ..\..\common\source\shape\Cube.cpp:1:
+..\..\common\source\shape/Cube.h(27,9): warning : private field 'colorbuffer' is not used [-Wunused-private-field]
+          GLuint colorbuffer;
+                 ^
+  8 warnings generated.
+  android_native_app_glue.c
+android_native_app_glue.c(18,9): warning : 'LOGI' macro redefined [-Wmacro-redefined]
+  #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "threaded_app", __VA_ARGS__))
+          ^
+  C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.NativeActivity\pch.h(10,9) :  note: previous definition is here
+  #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "AndroidProject1.NativeActivity", __VA_ARGS__))
+          ^
+  1 warning generated.
+  main.cpp
+  In file included from main.cpp:1:
+  In file included from ../../common/source\shape/Cube.h:3:
+../../common/source\enviroment/loaderUtility/Texture.h(153,58): warning : data argument not used by format string [-Wformat-extra-args]
+                          LOGW("Unable to allocate row_pointer while loading ", filename);
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^
+  C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.NativeActivity\pch.h(11,98) :  note: expanded from macro 'LOGW'
+  #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "AndroidProject1.NativeActivity", __VA_ARGS__))
+                                                                                                   ^
+  1 warning generated.
+  Android1.NativeActivity.vcxproj -> C:\Users\Happy\documents\visual studio 2015\Projects\Android2\x86\Debug\libAndroid1.so

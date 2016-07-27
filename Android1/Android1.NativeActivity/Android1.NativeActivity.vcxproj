@@ -225,6 +225,7 @@
     <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngpriv.h" />
     <ClInclude Include="..\..\common\library\android\jni\libpng\jni\pngstruct.h" />
     <ClInclude Include="..\..\common\source\enviroment\camera\Camera.h" />
+    <ClInclude Include="..\..\common\source\enviroment\loaderUtility\ShaderLoader.h" />
     <ClInclude Include="..\..\common\source\enviroment\loaderUtility\Texture.h" />
     <ClInclude Include="..\..\common\source\shape\Cube.h" />
     <ClInclude Include="pch.h" />

@@ -43,6 +43,7 @@ struct engine {
 	int32_t width;
 	int32_t height;
 	struct saved_state state;
+	Cube* shape;
 };
 
 /**
@@ -61,6 +62,12 @@ static int engine_init_display(struct engine* engine) {
 		EGL_BLUE_SIZE, 8,
 		EGL_GREEN_SIZE, 8,
 		EGL_RED_SIZE, 8,
+		EGL_NONE
+	};
+
+	const EGLint attribCont[] =
+	{
+		EGL_CONTEXT_CLIENT_VERSION,2,
 		EGL_NONE
 	};
 	EGLint w, h, format;
@@ -87,7 +94,7 @@ static int engine_init_display(struct engine* engine) {
 	ANativeWindow_setBuffersGeometry(engine->app->window, 0, 0, format);
 
 	surface = eglCreateWindowSurface(display, config, engine->app->window, NULL);
-	context = eglCreateContext(display, config, NULL, NULL);
+	context = eglCreateContext(display, config, EGL_NO_CONTEXT, attribCont);
 
 	if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE) {
 		LOGW("Unable to eglMakeCurrent");
@@ -123,9 +130,7 @@ static void engine_draw_frame(struct engine* engine) {
 	}
 
 	// Just fill the screen with a color.
-	glClearColor(((float)engine->state.x) / engine->width, engine->state.angle,
-		((float)engine->state.y) / engine->height, 1);
-	glClear(GL_COLOR_BUFFER_BIT);
+	engine->shape->drawShape();
 
 	eglSwapBuffers(engine->display, engine->surface);
 }
@@ -163,6 +168,16 @@ static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) 
 	return 0;
 }
 
+static void initShape(struct engine* engine)
+{
+	engine->shape = new Cube();
+	engine->shape->setMGR(engine->app->activity->assetManager);
+	engine->shape->setCamera(engine->width, engine->height);
+	engine->shape->loadShape();
+	engine->shape->loadTexture();
+	engine->shape->loadShaders();
+
+}
 /**
 * Process the next main command.
 */
@@ -179,6 +194,7 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 		// The window is being shown, get it ready.
 		if (engine->app->window != NULL) {
 			engine_init_display(engine);
+			initShape(engine);
 			engine_draw_frame(engine);
 		}
 		break;

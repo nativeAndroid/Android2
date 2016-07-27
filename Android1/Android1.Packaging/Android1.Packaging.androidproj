@@ -119,6 +119,8 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Content Include="assets\shader\TextureFragmentShader.fragmentshader" />
+    <Content Include="assets\shader\TransformVertexShader.vertexshader" />
     <Content Include="assets\texture\uvtemplate.png" />
     <Content Include="res\values\strings.xml" />
     <AntBuildXml Include="build.xml" />
@@ -129,9 +131,6 @@
     <ProjectReference Include="..\Android1.NativeActivity\Android1.NativeActivity.vcxproj">
       <Project>{67c771e1-9219-4565-985a-63d93bd82ca2}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\shaders\" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />

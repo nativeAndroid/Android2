@@ -1,27 +1,21 @@
 #pragma once
 #include <enviroment/camera/Camera.h>
 #include <enviroment/loaderUtility/Texture.h>
+#include <enviroment/loaderUtility/ShaderLoader.h>
 
 class Cube
 {
 private:
 	AAssetManager* mgr;
-
-	inline GLuint createShader(GLenum type, const char *shaderSrc); //create shader
-	inline char* decompose(const char * filename);//read shader from  assets
-	GLuint loadShaders(const char * vertex_path, const char * fragment_path);
-	void setMGR(AAssetManager* mgr);
-	void setWidthAndHeigh(int width, int height);
-
 private:
 	Camera *myCam;
 	Texture textureTools;
+	ShaderLoader shaderLoader;
 	
-	GLuint Texture;
+	GLuint Texture_;
 	GLuint TextureID;
 	GLuint uvbuffer;
 	
-	int width, height;
 
 	GLuint vertexbuffer;
 	GLuint colorbuffer;
@@ -37,8 +31,11 @@ public:
 	void loadShape();
 	void loadShaders();
 	void loadTexture();
-	
 	void drawShape();
+
+public:
+	void setCamera(int width, int height);
+	void setMGR(AAssetManager* mgr);
 
 	~Cube();
 };
