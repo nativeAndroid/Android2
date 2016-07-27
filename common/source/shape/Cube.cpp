@@ -113,7 +113,6 @@ void Cube::loadShaders()
 	MatrixID = glGetUniformLocation(programID, "MVP");
 	vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
 	vertexUVID = glGetAttribLocation(programID, "vertexUV");
-
 	Texture_ = textureTools.createTexture(mgr, "texture/uvtemplate.png");
 	TextureID = glGetUniformLocation(programID, "myTextureSampler");
 }

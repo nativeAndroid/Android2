@@ -120,5 +120,8 @@
     <Filter Include="3rdparty\libpng">
       <UniqueIdentifier>{f8dfdd7d-1f11-44ce-a4b8-073bd31e08b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="enviroment\coordinate">
+      <UniqueIdentifier>{dcb0320c-270d-41e0-acbb-d05e1f0580f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

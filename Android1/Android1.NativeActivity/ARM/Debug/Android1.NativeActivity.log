@@ -2,6 +2,15 @@
   ANT_HOME=C:\Program Files (x86)\Microsoft Visual Studio 14.0\Apps\apache-ant-1.9.3\
   JAVA_HOME=C:\Program Files (x86)\Java\jdk1.7.0_55
   NDK_ROOT=C:\ProgramData\Microsoft\AndroidNDK64\android-ndk-r11c\
+  Camera.cpp
+  In file included from ..\..\common\source\enviroment\camera\Camera.cpp:5:
+../../common/source\enviroment/camera/Camera.h(36,10): warning : private field 'MovementSpeed' is not used [-Wunused-private-field]
+          GLfloat MovementSpeed;
+                  ^
+../../common/source\enviroment/camera/Camera.h(38,10): warning : private field 'Zoom' is not used [-Wunused-private-field]
+          GLfloat Zoom;
+                  ^
+  2 warnings generated.
   Cube.cpp
   In file included from ..\..\common\source\shape\Cube.cpp:1:
   In file included from ..\..\common\source\shape/Cube.h:3:
@@ -47,7 +56,7 @@
   #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "AndroidProject1.NativeActivity", __VA_ARGS__))
                                                                                                    ^
   In file included from ..\..\common\source\shape\Cube.cpp:1:
-..\..\common\source\shape/Cube.h(21,9): warning : private field 'colorbuffer' is not used [-Wunused-private-field]
+..\..\common\source\shape/Cube.h(38,9): warning : private field 'colorbuffer' is not used [-Wunused-private-field]
           GLuint colorbuffer;
                  ^
   7 warnings generated.

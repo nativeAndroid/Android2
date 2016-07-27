@@ -92,11 +92,41 @@ public:
 
 	void computeMVP()
 	{
-		MVP =   projection * getDefaultViewMatrix() * model;;
+		MVP =   projection * frustrum * model;
+		//getDefaultViewMatrix
 	}
 
 	glm::mat4 getMVP()
 	{
-		return projection*getDefaultViewMatrix()*model;
+		return projection*frustrum*model;
+			//was defaultview
+	}
+
+	void setUpVector(glm::vec3 up)
+	{
+		this->upDirection = up;
+	}
+
+	void setLook(glm::vec3 look)
+	{
+		this->lookDirection = look;
+	}
+
+	void setPosition(glm::vec3 position)
+	{
+		this->position = position;
+	}
+
+	glm::vec3 getUpVector()
+	{
+		return upDirection;
+	}
+	glm::vec3 getLookDirection()
+	{
+		return  lookDirection;
+	}
+	glm::vec3 getPos()
+	{
+		return position;
 	}
 };
