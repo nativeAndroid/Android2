@@ -40,7 +40,9 @@ public:
 	{
 		this->position = position;
 		this->WorldUp = up;
+		this->up = up;
 		this->GetViewMatrix();
+		updateCameraVectorsToDefault();
 	}
 
 	glm::mat4 GetViewMatrix();
@@ -56,6 +58,7 @@ public:
 	void updateCameraVectors();
 	void updateCameraVectorsToDefault();
 	void updateCameraProjection();
+
 	void updateToDefaultProjection();
 	
 	void setWithAndHeight(float width, float height);

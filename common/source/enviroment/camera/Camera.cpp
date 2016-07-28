@@ -27,8 +27,8 @@ void Camera::updateCameraProjection()
 
 void Camera::updateToDefaultProjection()
 {
-	projection = glm::perspective(45.0f, (float)width / (float)height, (float)inf_metric, (float)sup_metric);
 	model = glm::mat4(1.0f);
+	projection = glm::perspective(45.0f, (float)width / (float)height, (float)inf_metric, (float)sup_metric);
 }
 
 glm::mat4 Camera::GetViewMatrix()
