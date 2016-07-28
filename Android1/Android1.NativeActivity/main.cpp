@@ -176,8 +176,7 @@ static void initShape(struct engine* engine)
 	engine->shape->loadShape();
 	engine->shape->loadTexture();
 	engine->shape->loadShaders();
-	engine->shape->defaultChange();
-
+	
 }
 /**
 * Process the next main command.

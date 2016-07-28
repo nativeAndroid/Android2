@@ -4,36 +4,86 @@
 
 #include <enviroment/camera/Camera.h>
 
-
 void Camera::updateCameraVectors()
 {
 	glm::vec3 front;
-	front.x = cos(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
-	front.y = sin(glm::radians(this->Pitch));
-	front.z = sin(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
-	this->lookDirection = glm::normalize(front);
-	// Also re-calculate the Right and Up vector
-	this->Right = glm::normalize(glm::cross(this->lookDirection, this->WorldUp));  
-	this->upDirection = glm::normalize(glm::cross(this->Right, this->lookDirection));
+	this->front = glm::normalize(front);
+	this->mRight = glm::normalize(glm::cross(this->front, this->WorldUp));
+	this->up = glm::normalize(glm::cross(this->mRight, this->front));
 }
 
-void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
+void Camera::updateCameraVectorsToDefault()
 {
-	xoffset *= this->MouseSensitivity;
-	yoffset *= this->MouseSensitivity;
+	WorldUp = glm::vec3(4, 3, 3);
+	position = glm::vec3(0,0,0);
+	mRight = glm::vec3(0, 1, 0);
+	frustrum = glm::lookAt(WorldUp, position + front, up);
+}
 
-	this->Yaw += xoffset;
-	this->Pitch += yoffset;
+void Camera::updateCameraProjection()
+{
+	frustrum = glm::lookAt(WorldUp, position + front, up);
+}
 
-	// Make sure that when pitch is out of bounds, screen doesn't get flipped
-	if (constrainPitch)
-	{
-		if (this->Pitch > 89.0f)
-			this->Pitch = 89.0f;
-		if (this->Pitch < -89.0f)
-			this->Pitch = -89.0f;
-	}
+void Camera::updateToDefaultProjection()
+{
+	projection = glm::perspective(45.0f, (float)width / (float)height, (float)inf_metric, (float)sup_metric);
+	model = glm::mat4(1.0f);
+}
 
-	// Update Front, Right and Up Vectors using the updated Eular angles
-	this->updateCameraVectors();
+glm::mat4 Camera::GetViewMatrix()
+{
+	frustrum = glm::lookAt(
+		this->WorldUp,
+		this->position + this->front,
+		this->up
+	);
+	return frustrum;
+}
+
+
+glm::vec3 Camera::getPos()
+{
+	return WorldUp;
+}
+
+glm::vec3 Camera::getLookDirection()
+{
+	return position;
+}
+
+glm::vec3 Camera::getUpVector()
+{
+	return up;
+}
+
+void Camera::setLook(glm::vec3 look)
+{
+	position = look;
+}
+
+void Camera::setUpVector(glm::vec3 up)
+{
+	this->up = up;
+}
+
+void Camera::setPosition(glm::vec3 pos)
+{
+	WorldUp = pos;
+}
+
+void Camera::setWithAndHeight(float width, float height)
+{
+	this->width = width;
+	this->height = height;
+}
+
+void Camera::computeMVP()
+{
+	MVP = projection*frustrum*model;
+}
+
+glm::mat4 Camera::getMVP()
+{
+	return  MVP;
 }

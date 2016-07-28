@@ -14,119 +14,53 @@ enum Camera_Movement {
 	RIGHT
 };
 
-const GLfloat YAW = -90.0f;
-const GLfloat PITCH = 0.0f;
-const GLfloat SPEED = 3.0f;
-const GLfloat SENSITIVTY = 0.25f;
-const GLfloat ZOOM = 45.0f;
-
 class Camera
 {
 private:
-	glm::vec3 upDirection;
-	glm::vec3 lookDirection;
 	glm::vec3 position;
-
-	glm::vec3 Right;
-	glm::vec3 WorldUp;
-		
-	GLfloat Yaw;
-	GLfloat Pitch;
-
-	GLfloat MovementSpeed;
-	GLfloat MouseSensitivity;
-	GLfloat Zoom;
+	glm::vec3 front;
 	
-	glm::mat4 MVP;
+	glm::vec3 up;
+	glm::vec3 mRight;
+	glm::vec3 WorldUp;
+private:
+	float perspective_angle = 45.0f;
+	float inf_metric = 0.1f;
+	float sup_metric = 100.0f;
+
 protected:
 	glm::mat4 projection;
 	glm::mat4 model;
+	glm::mat4 MVP;
 	glm::mat4 frustrum;
 	float width, height;
 public:
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), 
-		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), 
-		GLfloat yaw = YAW, GLfloat pitch = PITCH)
-		: lookDirection(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f)) : front(glm::vec3(0.0f, 0.0f, 0.0f))
 	{
 		this->position = position;
 		this->WorldUp = up;
-		this->Yaw = yaw;
-		this->Pitch = pitch;
-		this->updateCameraVectors();
+		this->GetViewMatrix();
 	}
+
+	glm::mat4 GetViewMatrix();
+
+	glm::vec3 getPos();
+	glm::vec3 getLookDirection();
+	glm::vec3 getUpVector();
+
+	void setLook(glm::vec3 look);
+	void setUpVector(glm::vec3 up);
+	void setPosition(glm::vec3 pos);
 
 	void updateCameraVectors();
-	void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true);
+	void updateCameraVectorsToDefault();
+	void updateCameraProjection();
+	void updateToDefaultProjection();
+	
+	void setWithAndHeight(float width, float height);
+	void computeMVP();
+	glm::mat4 getMVP();
+private:
 
-	glm::mat4 GetViewMatrix()
-	{
-		return frustrum;
-	}
-
-	void computeFrustrum()
-	{
-		frustrum = glm::lookAt(this->position, this->position + this->lookDirection, this->upDirection);
-	}
-
-	static glm::mat4 getDefaultViewMatrix()
-	{
-		return glm::lookAt(
-			glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
-			glm::vec3(0, 0, 0), // and looks at the origin
-			glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-		);
-	}
-
-	void setDefaultProjection()
-	{
-		projection = glm::perspective(45.0f, (float)width / (float)height, 0.1f, 100.0f);
-		model = glm::mat4(1.0f);
-	}
-
-	void setWithAndHeight(float width, float height)
-	{
-		this->width = width;
-		this->height = height;
-	}
-
-	void computeMVP()
-	{
-		MVP =   projection * frustrum * model;
-		//getDefaultViewMatrix
-	}
-
-	glm::mat4 getMVP()
-	{
-		return projection*frustrum*model;
-			//was defaultview
-	}
-
-	void setUpVector(glm::vec3 up)
-	{
-		this->upDirection = up;
-	}
-
-	void setLook(glm::vec3 look)
-	{
-		this->lookDirection = look;
-	}
-
-	void setPosition(glm::vec3 position)
-	{
-		this->position = position;
-	}
-
-	glm::vec3 getUpVector()
-	{
-		return upDirection;
-	}
-	glm::vec3 getLookDirection()
-	{
-		return  lookDirection;
-	}
-	glm::vec3 getPos()
-	{
-		return position;
-	}
 };
