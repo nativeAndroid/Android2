@@ -2,9 +2,21 @@
 
 #ifdef __ANDROID__
 	#include <pch.h>
+#elif _WIN32
+//#ifndef _glfw3_h_
+//#include <GLFW/glfw3.h>
+//#endif
+//#ifndef __glew_h__
+//	#include <GL/GLEW.h>
+//#endif//__glew_h__
+#include <cstdio>
+#include <cstdlib>
+#include <cassert>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <algorithm>
 #endif
-
-
 class ShaderLoader
 {
 #ifdef __ANDROID__
@@ -13,20 +25,22 @@ class ShaderLoader
 protected:
 	//following method should be separated into another class 
 	inline GLuint createShader(GLenum type, const char *shaderSrc); //create shader
-	inline char* decompose(const char * filename);//read shader from  assets
+	inline const char* decompose(const char * filename);//read shader from  assets
 public:
-
-#ifdef __ANDROID__
 	GLuint loadShaders(const char * vertex_path, const char * fragment_path);
+#ifdef __ANDROID__
 	void setMGR(AAssetManager* mgr);
 #endif
 
 };
+#ifdef __ANDROID__
 
 inline void ShaderLoader::setMGR(AAssetManager* mgr)
 {
 	this->mgr = mgr;
 }
+
+#endif // __ANDROID__
 
 inline GLuint ShaderLoader::createShader(GLenum type, const char* shaderSrc)
 {
@@ -50,9 +64,14 @@ inline GLuint ShaderLoader::createShader(GLenum type, const char* shaderSrc)
 		{
 			char* infoLog = (char*)malloc(sizeof(char) * infoLen);
 			glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
+			#ifdef __ANDROID__
 			LOGW("Bred");
 			LOGW(infoLog);
 			free(infoLog);
+			#elif _WIN32
+			//errpr
+			#endif
+			
 		}
 		glDeleteShader(shader);
 		return 0;
@@ -60,7 +79,8 @@ inline GLuint ShaderLoader::createShader(GLenum type, const char* shaderSrc)
 	return shader;
 }
 
-inline char* ShaderLoader::decompose(const char* filename)
+#ifdef __ANDROID__
+inline const char* ShaderLoader::decompose(const char* filename)
 {
 	AAsset* file = AAssetManager_open(mgr, filename, AASSET_MODE_BUFFER);
 
@@ -79,13 +99,36 @@ inline char* ShaderLoader::decompose(const char* filename)
 	AAsset_close(file);
 	return buffer;
 }
+#elif _WIN32
+inline const char* ShaderLoader::decompose(const char* filename)
+{
+	FILE* ptrShaderFile = fopen(filename,"r");
+	int fileSize = 0;
+	char* shaderCode = NULL;
+
+	fseek(ptrShaderFile, 0, SEEK_END);
+	fileSize = ftell(ptrShaderFile);
+	rewind(ptrShaderFile);
+
+	shaderCode = (char*)malloc(sizeof(char)*(fileSize + 1));
+	memset(shaderCode, 0, fileSize);
+	fread(shaderCode, sizeof(char), fileSize, ptrShaderFile);
+	shaderCode[fileSize] = '\0';
+	fclose(ptrShaderFile);
+	
+	return shaderCode;
+}
+#endif
+
 
 inline GLuint ShaderLoader::loadShaders(const char* vertex_path, const char* fragment_path)
 {
+	#ifdef __ANDROID__
 	assert(mgr != NULL);
+	#endif
 
-	GLchar* vertexShaderSrc = decompose(vertex_path);
-	GLchar* fragmentShaderSrc = decompose(fragment_path);
+	const GLchar* vertexShaderSrc = decompose(vertex_path);
+	const GLchar* fragmentShaderSrc = decompose(fragment_path);
 
 	GLuint vertexShader = createShader(GL_VERTEX_SHADER, vertexShaderSrc);
 	GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentShaderSrc);
@@ -112,11 +155,15 @@ inline GLuint ShaderLoader::loadShaders(const char* vertex_path, const char* fra
 		{
 			char* infoLog = (char*)malloc(sizeof(char) * infoLen);
 			glGetProgramInfoLog(shprog, infoLen, NULL, infoLog);
+			#ifdef __ANDROID__
 			LOGW(infoLog);
 			free(infoLog);
+			#endif
 		}
 		glDeleteProgram(shprog);
+		#ifdef __ANDROID__
 		LOGW("SHADER CREATING PROGRAM");
+		#endif
 		return 0;
 	}
 	// Store the program object

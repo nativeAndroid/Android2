@@ -7,8 +7,9 @@
 class Cube
 {
 private:
+#ifdef __ANDROID__
 	AAssetManager* mgr;
-	
+#endif
 private:
 	Camera *myCam;
 	Texture textureTools;
@@ -37,9 +38,11 @@ public:
 
 public:
 	void setCamera(int width, int height);
+	void resetToDefaultCamera();
+#ifdef __ANDROID__
 	void setMGR(AAssetManager* mgr);
-
-	void defaultChange();
+#endif
+	void defaultChange() const;
 
 	~Cube();
 };

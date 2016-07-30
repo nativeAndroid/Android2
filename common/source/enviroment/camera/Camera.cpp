@@ -1,7 +1,6 @@
 #ifdef  __ANDROID__
 	#include "pch.h"
 #endif //  __ANDROID__
-
 #include <enviroment/camera/Camera.h>
 
 void Camera::updateCameraVectors()

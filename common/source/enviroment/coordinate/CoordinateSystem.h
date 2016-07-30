@@ -6,10 +6,7 @@
 #ifndef CMATH_H
 	#include <cmath>
 #endif
-#ifndef FUNCT_GEOMETRY_H
-	
+	#ifndef FUNCT_GEOMETRY_H
 #endif
-
-
 
 #endif

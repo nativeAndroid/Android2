@@ -1,0 +1,224 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700|Roboto+Condensed:400&subset=latin,cyrillic-ext);
+
+body,h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {font-family: 'Roboto', arial, sans-serif;font-weight:300;}
+body {font-size:16px;}
+nav.navbar {max-width:1920px;margin:0 auto;}
+.background-title {max-width:1920px;}
+
+blockquote p, blockquote {font-size:inherit;font-weight:inherit;line-height:inherit;padding-bottom:0;}
+
+.container .main h1 {font-size:36px;margin-bottom:24px;font-weight:700;}
+.container .main h2 {font-size:26px;margin-bottom:24px;font-weight:700;}
+.container .main h3 {font-size:18px;margin-bottom:24px;font-weight:700;}
+.container .main h4 {font-size:14px;margin-bottom:24px;font-weight:700;}
+
+a {color:#428bca;}
+a:hover {color:#2a6496;}
+
+b, strong {font-weight:700;}
+
+.alignleft {text-align:left;}
+.alignright {text-align:right;}
+
+.wp-caption {display:block;}
+.wp-caption img, .wp-caption iframe, .wp-caption .pull-left {float:left;margin-right:15px;}
+.wp-caption-after {clear:both;margin-bottom:20px;}
+.wp-caption-before {clear:both;margin-bottom:20px;}
+
+.embed-video {background:#eee;}
+.embed-panorama {background:#eee;}
+
+.tags, .date {
+    padding: 10px;
+    border-radius: 3px;
+	font-size:18px;
+	font-weight:400;
+	line-height:22px;
+	}
+
+.date {display:inline;white-space:nowrap;}
+
+.tags span, .date span {
+    font-weight: 400;
+    color: #ffffff;
+	}
+
+.tags>span>a {text-decoration:none;}
+.tags>span>a:hover {text-decoration:underline;}
+
+@media (max-width: 768px) {
+	.wp-caption img {float:none;}
+	.wp-caption img, .wp-caption .autoresize {width: 100%;}
+	.wp-caption, .wp-caption p {background:#eee;}
+	.wp-caption p {padding:10px;}
+
+	.tags, .date {
+	    padding: 10px;
+	    border-radius: 3px;
+		font-size:13px;
+		line-height:14px;
+		}
+
+}
+
+@media (max-width: 1500px) {
+	#mk-social-imho {display:none;}
+	}
+
+@media (min-width: 769px) {
+	.wp-caption img,.wp-caption .autoresize {width: 568px;}
+}
+@media (min-width: 992px) {
+	.wp-caption img,.wp-caption .autoresize {width: 792px;}
+}
+@media (min-width: 1200px) {
+	.wp-caption img,.wp-caption .autoresize {width: 950px;}
+}
+@media (min-width: 1300px) {
+	.wp-caption img,.wp-caption .autoresize {width: 950px;}
+}
+
+
+.about-post {margin-bottom:30px;}
+.about-post p {padding:0;margin:0;}
+.about-post h3 {margin:0;padding:0;}
+.about-post a {color:white;text-decoration:underline;}
+
+.background-title {margin:0 auto 20px auto;}
+.background-title h1 {font-weight:600;}
+
+@media (max-width: 992px) {
+	.background-title {height:auto;background:inherit;}
+	.background-title h1 {text-shadow:none; color:#444;font-size:24px;line-height:auto;}
+}
+
+.bottom-navigation {background: #444;width:100%;margin:40px 0 0 0;}
+.bottom-navigation .pager a {text-decoration:none;color:white;background:#222;border-color:#666;}
+.bottom-navigation .pager a:hover {background:#333;}
+
+.sidebar {background: #222;color:#aaa;}
+.sidebar a {color:white;text-decoration:none;}
+.sidebar a:hover {text-decoration:underline;}
+.sidebar ul {list-style:none;padding:0;margin:0;}
+.sidebar ul ul {padding-left:30px;}
+.sidebar ul li {margin-bottom:5px;}
+
+.navbar {margin:0;padding:0;}
+.navbar-nav.navbar-right:last-child {margin-right: 0;}
+
+h1 {letter-spacing:-2px;}
+h2 {letter-spacing:-2px;}
+
+.title-link {color:#444;font-weight:600;}
+
+nav li.social-dropdown {display:none;}
+
+@media (max-width: 1285px) {
+	nav li.social-normal {display:none;}
+	nav li.social-dropdown {display:inline;}
+	}
+
+@media (max-width: 940px) {
+	nav .navbar-form {display:none;}
+	}
+
+#mikhail-krivyy-map-canvas {width:100%;height:600px;margin-bottom:30px;background:#666;}
+
+#vk_comments,
+#vk_comments iframe {
+    width: 100% !important;
+}
+
+.embed-video ul {list-style:none;}
+.embed-video li {list-style:none;margin-top:5px;}
+
+.sidebar .row {margin:0;padding:0;}
+
+.sidebar .footer-similar {padding:40px 60px 0 60px;}
+.sidebar .footer-similar .similar {margin-bottom:30px;}
+.sidebar .footer-similar .similar img {float:left;margin:0 20px 10px 0;width:150px;height:150px;border:0;}
+.sidebar .footer-similar .similar h2 {padding:0;margin:-5px 0 20px 0;font-size:24px;}
+
+.sidebar .sidebar-1 {padding:0px 60px 20px 60px;}
+.sidebar .sidebar-1 ul>li {float:left;display:block;margin:3px 10px 3px 0;}
+.sidebar .sidebar-1 ul.children {display:none;}
+
+#_atssh {background: #222;display:none;}
+
+.txtlinks {background: #444;padding:20px 75px;color:white;}
+.txtlinks-hint {font-weight:bold;}
+
+.main h4 {margin:30px 0 15px 0;}
+
+.copyright {padding:0 15px 0 15px;font-size:12px;color:#aaa;}
+
+.customsocial {margin:0 0 10px 0;}
+.customsocial .cs-icon {width:34px;height:34px;background-image: url('/wp-content/themes/mikhail-krivyy/images/social-icons.png');float:left;margin:0 10px 0 1px;background-repeat:no-repeat;cursor:pointer;}
+.customsocial .cs-icon:hover {opacity:1;}
+.customsocial .cs-title {float:left;padding:20px 10px 0 0;}
+.customsocial #cs-vk {background-position:-654px -15px;}
+.customsocial #cs-fb {background-position:-14px -15px;}
+.customsocial #cs-tw {background-position:-398px -15px;}
+.customsocial #cs-gp {background-position:-78px -15px;}
+.customsocial #cs-lj {background-position:-719px -15px;}
+.customsocial #cs-ok {background-position:-591px -15px;}
+.customsocial #cs-rss {background-position:-336px -15px;}
+.customsocial #cs-yt {background-position:-527px -14px;}
+.customsocial #cs-in {background-position:-142px -15px;}
+
+.customsocial .cs-count {border:1px solid black;margin-top:-4px;float:right;margin-right:-4px;font-size:11px;padding:2px 4px;background-color:white;}
+
+.subscribator-option {margin-top:20px;}
+
+.pastview-picture {width:100%;}
+.pastview-picture-1 {height:100%;width:100%;background-size:cover;}
+.pastview-picture-2 {height:100%;width:46%;background-size:cover;}
+.pastview-ruller {width:60px;height:100%;margin-left:46%;}
+.pastview-ruller>div {background-image:url(/wp-content/plugins/mikhail-krivyy-pastview/arrows.png);background-position:center;width:100%;margin-left:-30px;height:100%;cursor:move;}
+
+@media (min-width: 769px) {
+	.pastview-picture {width:568px;}
+	.pastview-picture-1 {background-size:568px;}
+	.pastview-picture-2 {background-size:568px;}
+}
+@media (min-width: 992px) {
+	.pastview-picture {width:792px;}
+	.pastview-picture-1 {background-size:792px;}
+	.pastview-picture-2 {background-size:792px;}
+}
+@media (min-width: 1200px) {
+	.pastview-picture {width:950px;}
+	.pastview-picture-1 {background-size:950px;}
+	.pastview-picture-2 {background-size:950px;}
+}
+
+.modal-backdrop.in {opacity: 0.8;}
+.modal-content {border-radius: 0;}
+
+@media (min-width: 1380px) {
+	.container {
+	    width: 1270px;
+		}
+
+	.container .main h1 {font-size:46px;margin-bottom:24px;}
+	.container .main h2 {font-size:36px;margin-bottom:24px;}
+	.container .main h3 {font-size:28px;margin-bottom:24px;}
+	.container .main h4 {font-size:24px;margin-bottom:24px;}
+
+	.container .main {font-size:20px;line-height:1.3;font-weight:300;}
+	.container .main p {margin-bottom:24px;line-height:30px;}
+	.container .main .wp-caption-text {font-size:18px;line-height:26px;}
+	}
+
+@media (min-width: 1680px) {
+	.sidebar .footer-similar .similar h2 {font-size:34px;}
+	}
+
+
+@media print {
+	.mk-comments, .mk-share, .about-post, .bottom-navigation, #mk-footer, .mikhail-krivyy-map, #mikhail-krivyy-map-canvas {display:none;}
+	#maintitle {margin:20pt 0 10pt 0;}
+
+	.wp-caption img, .wp-caption .autoresize {width:100%;height:auto;}
+	.container, .row, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {width:100%;}
+	}

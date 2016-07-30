@@ -173,6 +173,8 @@ static void initShape(struct engine* engine)
 	engine->shape = new Cube();
 	engine->shape->setMGR(engine->app->activity->assetManager);
 	engine->shape->setCamera(engine->width, engine->height);
+	//engine->shape->resetToDefaultCamera();
+	engine->shape->defaultChange();
 	engine->shape->loadShape();
 	engine->shape->loadTexture();
 	engine->shape->loadShaders();

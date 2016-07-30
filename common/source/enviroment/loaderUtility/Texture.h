@@ -1,7 +1,7 @@
+#ifdef __ANDROID__
 #ifndef PNG_H
 	#include <jni/png.h>
 #endif
-
 
 struct ImageData {
 	png_uint_32 img_width, img_height;
@@ -10,9 +10,24 @@ struct ImageData {
 };
 static AAsset* ptrFile;
 
+#elif  _WIN32
+#ifndef __GLEW_H__
+	#include <GL/GLEW.h>
+#endif//__glew_h__
+#ifndef _glfw3_h_
+	#include <GLFW/glfw3.h>
+#endif
+ 
+#include <cstdio>
+#include <cstdlib>
+#include <jpeglib.h>
+#include <jerror.h>
+#endif
+
 class Texture
 {
 private:
+#ifdef __ANDROID__
 	struct PNGImageData : public ImageData {
 		PNGImageData(png_byte* pixels, int width, int height) {
 			this->img_width = width;
@@ -47,7 +62,9 @@ private:
 	}
 
 	struct ImageData* ptrImg;
+#endif
 private:
+#ifdef __ANDROID__
 	void LoadImage(AAssetManager* ptrAsset, const char * filename)
 	{
 		ptrFile = AAssetManager_open(ptrAsset, filename, AASSET_MODE_BUFFER);
@@ -176,7 +193,9 @@ private:
 	{
 		AAsset_read(ptrFile, data, length);
 	}
+#endif
 public:
+#ifdef __ANDROID__
 	GLuint createTexture(AAssetManager* ptrAsset, const char * filename)
 
 	{
@@ -197,7 +216,78 @@ public:
 
 		return texture1;
 	}
+
+#elif _WIN32
+	GLuint createTexture(char* FileName)
+	{
+		unsigned long x, y;
+		unsigned int texture_id;
+		unsigned long data_size;     // length of the file
+		int channels;               //  3 =>RGB   4 =>RGBA 
+		unsigned int type;
+		unsigned char * rowptr[1];    // pointer to an array
+		unsigned char * jdata;        // data for the image
+		struct jpeg_decompress_struct info; //for our jpeg info
+		struct jpeg_error_mgr err;          //the error handler
+
+		FILE* file = fopen(FileName, "rb");  //open the file
+
+		perror("fopen");
+		char* path;
+		_get_pgmptr(&path);
+
+		info.err = jpeg_std_error(&err);
+		jpeg_create_decompress(&info);   //fills info structure
+
+										 //if the jpeg file doesn't load
+		if (!file) {
+			fprintf(stderr, "Error reading JPEG file %s!", FileName);
+			return 0;
+		}
+
+		jpeg_stdio_src(&info, file);
+		jpeg_read_header(&info, TRUE);   // read jpeg file header
+
+		jpeg_start_decompress(&info);    // decompress the file
+
+										 //set width and height
+		x = info.output_width;
+		y = info.output_height;
+		channels = info.num_components;
+		type = GL_RGB;
+		if (channels == 4) type = GL_RGBA;
+
+		data_size = x * y * 3;
+
+		//--------------------------------------------
+		// read scanlines one at a time & put bytes 
+		//    in jdata[] array. Assumes an RGB image
+		//--------------------------------------------
+		jdata = (unsigned char *)malloc(data_size);
+		while (info.output_scanline < info.output_height) // loop
+		{
+			// Enable jpeg_read_scanlines() to fill our jdata array
+			rowptr[0] = (unsigned char *)jdata +  // secret to method
+				3 * info.output_width * info.output_scanline;
+
+			jpeg_read_scanlines(&info, rowptr, 1);
+		}
+		//---------------------------------------------------
+
+		jpeg_finish_decompress(&info);   //finish decompressing
+
+										 //----- create OpenGL tex map (omit if not needed) --------
+		glGenTextures(1, &texture_id);
+		glBindTexture(GL_TEXTURE_2D, texture_id);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, x, y, GL_RGB, GL_UNSIGNED_BYTE, jdata);
+
+		fclose(file);                    //close the file
+		free(jdata);
+
+		return texture_id;    // for OpenGL tex maps
+	}
+
+#endif
+
 };
-
-
 

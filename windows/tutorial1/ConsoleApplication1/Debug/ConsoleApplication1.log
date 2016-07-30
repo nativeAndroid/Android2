@@ -1,0 +1,9 @@
+﻿  Source.cpp
+e:\android2\windows\tutorial1\consoleapplication1\source.cpp(1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  e:\android2\windows\tutorial1\consoleapplication1\source.cpp(1): note: command-line arguments:  see previous definition of '_CRT_SECURE_NO_WARNINGS'
+  Cube.cpp
+e:\android2\common\source\shape\cube.cpp(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Camera.cpp
+  Generating Code...
+  ConsoleApplication1.vcxproj -> E:\Android2\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> E:\Android2\Debug\ConsoleApplication1.pdb (Full PDB)

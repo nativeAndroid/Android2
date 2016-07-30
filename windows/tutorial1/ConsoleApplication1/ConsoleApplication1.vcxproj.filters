@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="enviroment">
+      <UniqueIdentifier>{e2b70fd3-704e-4884-a60d-53416a798f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\camera">
+      <UniqueIdentifier>{46851ed8-338f-4ed7-b6cd-4f5ac91e1e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\coordinate">
+      <UniqueIdentifier>{63de7711-7369-4c3b-9dc8-016ca586b6b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\loaderUtility">
+      <UniqueIdentifier>{76d83225-55f0-43a4-bfcf-5c4642735b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enviroment\shape">
+      <UniqueIdentifier>{52ff330e-24c6-4d33-955f-9a7673f6e1fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\source\enviroment\camera\Camera.cpp">
+      <Filter>enviroment\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\source\shape\Cube.cpp">
+      <Filter>enviroment\shape</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\common\source\enviroment\camera\Camera.h">
+      <Filter>enviroment\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\source\enviroment\coordinate\CoordinateSystem.h">
+      <Filter>enviroment\coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\source\enviroment\loaderUtility\ShaderLoader.h">
+      <Filter>enviroment\loaderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\source\enviroment\loaderUtility\Texture.h">
+      <Filter>enviroment\loaderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\source\shape\Cube.h">
+      <Filter>enviroment\shape</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="TextureFragmentShader.fragmentshader" />
+    <None Include="TransformVertexShader.vertexshader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="uvtemplate.bmp" />
+    <Image Include="test.jpg" />
+  </ItemGroup>
+</Project>

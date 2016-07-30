@@ -1,7 +1,0 @@
-C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\Android1.apk.recipe
-C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\Android1.apk.recipe.merged
-C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\FileStringReplace.incremental
-C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\Android1.apk
-C:\Users\Happy\documents\visual studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\Android1.lastsuccessfuldeploy
-C:\Users\Happy\Documents\Visual Studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\Package\libs\x86\libAndroid1.so
-C:\Users\Happy\Documents\Visual Studio 2015\Projects\Android2\Android1\Android1.Packaging\x86\Debug\Package\libs\x86\libgnustl_static.a

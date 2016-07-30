@@ -15,16 +15,21 @@ glm::vec3 sphericalToCartesian(glm::vec3 sphere)
 
 	return glm::vec3(x, y, z);
 }
-
+#ifdef __ANDROID__
 void Cube::setMGR(AAssetManager * mgr)
 {
 	this->mgr = mgr;
 	shaderLoader.setMGR(mgr);
 }
+#endif
 
-void Cube::defaultChange()
+void Cube::defaultChange() const
 {
-	/*glm::vec3 pos = myCam->getPos();
+	//myCam->updateCameraVectors();
+	myCam->updateCameraProjection();
+	myCam->computeMVP();
+
+	glm::vec3 pos = myCam->getPos();
 	glm::vec3 look = myCam->getLookDirection();
 	glm::vec3 up = myCam->getUpVector();
 
@@ -39,17 +44,21 @@ void Cube::defaultChange()
 	myCam->setLook(look);
 	myCam->setUpVector(up);
 	myCam->setPosition(pos);
-	myCam->updateCameraVectors();
-	myCam->updateCameraProjection();*/
+	myCam->updateCameraProjection();
 }
 
 void Cube::setCamera(int width, int height)
 {
 	myCam = new Camera();
 	myCam->setWithAndHeight(width, height);
+}
+
+void Cube::resetToDefaultCamera()
+{
 	myCam->updateCameraVectorsToDefault();
 	myCam->updateToDefaultProjection();
 	myCam->computeMVP();
+	
 }
 
 Cube::Cube()
@@ -146,16 +155,18 @@ void Cube::loadShape()
 void Cube::loadShaders()
 {
 	glDepthFunc(GL_LESS);
-	programID = shaderLoader.loadShaders("shader/TransformVertexShader.vertexshader", "shader/TextureFragmentShader.fragmentshader");
+	programID = shaderLoader.loadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
 	MatrixID = glGetUniformLocation(programID, "MVP");
 	vertexPosition_modelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
 	vertexUVID = glGetAttribLocation(programID, "vertexUV");
-	Texture_ = textureTools.createTexture(mgr, "texture/uvtemplate.png");
 	TextureID = glGetUniformLocation(programID, "myTextureSampler");
 }
 
 void Cube::loadTexture()
 {
+
+	Texture_ = textureTools.createTexture("test.jpg");
+	
 }
 
 void Cube::drawShape()
